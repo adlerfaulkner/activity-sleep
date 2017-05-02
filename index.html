@@ -14,10 +14,6 @@
 		var scope = "mshealth.ReadProfile";
 		var code = "";
 
-		$('#frame').on('load', function() {
-			console.log($('#frame').contents().find('body'));
-		});
-
 		$(document).ready( function() {
 			addMethod();
 			setTimeout( authorize, 300);
@@ -42,22 +38,10 @@
 				'&response_type=code';
 		}
 		function getAuthToken() {
-			// $.post({
- 		// 		'url': authTokenBaseUrl,
- 		// 		'data': {
- 		// 			'client_id': client_id,
- 		// 			'redirect_uri': redirect_uri,
- 		// 			'client_secret': secret,
- 		// 			'code': code,
- 		// 			'grant_type': 'authorization_code'
- 		// 		},
- 		// 		'dataType': 'json',
- 		// 		'success': function(data, status, xhr) {
- 		// 			console.log(data);
- 		// 			console.log(status);
- 		// 			console.log(xhr);
- 		// 		}
- 		// 	});
+			$('#frame').on('load', function() {
+				console.log($('#frame').contents().find('body'));
+			});
+			
 			$.form(
 				authTokenBaseUrl,
 				{
