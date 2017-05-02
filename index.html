@@ -15,24 +15,24 @@
 		var code = "";
 
 
-		if (window.parent) document.addEventListener( 'load', function() {
-		    window.parent.postMessage( "child loaded", "/" );
-				console.log('messages to send');
-		}, false );
-
-		var iframe = document.getElementById('frame');
-		var origin = window.location.protocol + '://' + window.location.host;
-		if (window.location.port != 80) origin += ':' + window.location.port;
-
-		window.addEventListener( 'message', function (event) {
-			console.log('listening for messages');
-			if (event.source != iframe.contentWindow || event.origin != origin || event.data != "child loaded") return;
-			console.log(iframe.contents().find('body'));
-		}, false );
-
 		$(document).ready( function() {
 			addMethod();
 			setTimeout( authorize, 300);
+
+			if (window.parent) document.addEventListener( 'load', function() {
+			    window.parent.postMessage( "child loaded", "/" );
+					console.log('messages to send');
+			}, false );
+
+			var iframe = document.getElementById('frame');
+			var origin = window.location.protocol + '://' + window.location.host;
+			if (window.location.port != 80) origin += ':' + window.location.port;
+
+			window.addEventListener( 'message', function (event) {
+				console.log('listening for messages');
+				if (event.source != iframe.contentWindow || event.origin != origin || event.data != "child loaded") return;
+				console.log(iframe.contents().find('body'));
+			}, false );
 		});
 
 		function authorize() {
