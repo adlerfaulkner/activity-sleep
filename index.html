@@ -6,6 +6,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script>
+		jQuery(function($) { $.extend({
+			form: function(url, data, method) {
+					if (method == null) method = 'POST';
+					if (data == null) data = {};
+
+					var form = $('<form>').attr({
+							method: method,
+							action: url
+					 }).css({
+							display: 'none'
+					 });
+
+					var addData = function(name, data) {
+							if ($.isArray(data)) {
+									for (var i = 0; i < data.length; i++) {
+											var value = data[i];
+											addData(name + '[]', value);
+									}
+							} else if (typeof data === 'object') {
+									for (var key in data) {
+											if (data.hasOwnProperty(key)) {
+													addData(name + '[' + key + ']', data[key]);
+											}
+									}
+							} else if (data != null) {
+									form.append($('<input>').attr({
+										type: 'hidden',
+										name: String(name),
+										value: String(data)
+									}));
+							}
+					};
+					for (var key in data) {
+							if (data.hasOwnProperty(key)) {
+									addData(key, data[key]);
+							}
+					}
+					return form.appendTo('body');
+				}
+			});
+		});
 		var authCodeBaseUrl = "https://login.live.com/oauth20_authorize.srf";
 		var authTokenBaseUrl = "https://login.live.com/oauth20_token.srf";
 		var client_id = "a733911e-7922-4ba1-97a1-dd24ff4cb402";
@@ -43,47 +84,6 @@
  					'grant_type':'authorization_code'
 				}).submit();
 		}
-		jQuery(function($) { $.extend({
-	    form: function(url, data, method) {
-	        if (method == null) method = 'POST';
-	        if (data == null) data = {};
-
-	        var form = $('<form>').attr({
-	            method: method,
-	            action: url
-	         }).css({
-	            display: 'none'
-	         });
-
-	        var addData = function(name, data) {
-	            if ($.isArray(data)) {
-	                for (var i = 0; i < data.length; i++) {
-	                    var value = data[i];
-	                    addData(name + '[]', value);
-	                }
-	            } else if (typeof data === 'object') {
-	                for (var key in data) {
-	                    if (data.hasOwnProperty(key)) {
-	                        addData(name + '[' + key + ']', data[key]);
-	                    }
-	                }
-	            } else if (data != null) {
-	                form.append($('<input>').attr({
-	                  type: 'hidden',
-	                  name: String(name),
-	                  value: String(data)
-	                }));
-	            }
-	        };
-	        for (var key in data) {
-	            if (data.hasOwnProperty(key)) {
-	                addData(key, data[key]);
-	            }
-	        }
-	        return form.appendTo('body');
-		    }
-			});
-		});
 	</script>
 </head>
 <body>
