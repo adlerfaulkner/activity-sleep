@@ -22,12 +22,7 @@
 
 		function setFrameLoad() {
 			$('#frame').on('load', function() {
-				try {
-					console.log($('#frame').contents().find('body'));
-	    	}
-		    catch( e ) {
-		       return false;
-		    }
+				console.log($('#frame').contents().find('body'));
 			});
 		}
 
