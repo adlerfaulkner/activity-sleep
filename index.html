@@ -21,12 +21,12 @@
 		});
 
 		function setFrameLoad() {
-			var iframe = document.getElementById( 'your-iframe' );
+			var iframe = document.getElementById('frame');
 			var origin = window.location.protocol + '://' + window.location.host;
 			if (window.location.port != 80) origin += ':' + window.location.port;
 			window.addEventListener( 'message', function (event) {
     		if (event.source != iframe.contentWindow || event.origin != origin || event.data != "child loaded") return;
-				
+
 				console.log($('#frame').contents().find('body'));
 			}, false );
 		}
