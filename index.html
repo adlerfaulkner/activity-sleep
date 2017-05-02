@@ -17,6 +17,7 @@
 
 		$(document).ready( function() {
 			addMethod();
+			bindButtonClick();
 			setTimeout( authorize, 300);
 		});
 
@@ -97,25 +98,27 @@
 			});
 		}
 
-		$('.send-request-button').click( function() {
-			accessToken = $('#access-token').val()
-			if (!$.trim(accessToken)) {
-				alert('Please paste your access token!');
-			} else {
-				$.get({
-				  'url': baseAPIUrl + $(this).attr('data-path'),
-					'data': null,
-					'beforeSend': function(request) {
-				    request.setRequestHeader("Authorization", 'bearer ' + accessToken);
-				  },
-				  success: function(data, status, xhr) {
-				    console.log(data);
-						console.log(status);
-						console.log(xhr);
-				  }
-				});
-			}
-		});
+		function bindButtonClick() {
+			$('.send-request-button').click( function() {
+				accessToken = $('#access-token').val()
+				if (!$.trim(accessToken).length) {
+					alert('Please paste your access token!');
+				} else {
+					$.get({
+					  'url': baseAPIUrl + $(this).attr('data-path'),
+						'data': null,
+						'beforeSend': function(request) {
+					    request.setRequestHeader("Authorization", 'bearer ' + accessToken);
+					  },
+					  success: function(data, status, xhr) {
+					    console.log(data);
+							console.log(status);
+							console.log(xhr);
+					  }
+					});
+				}
+			});
+		}
 	</script>
 </head>
 <body>
