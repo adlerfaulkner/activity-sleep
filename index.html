@@ -38,32 +38,32 @@
 				'&response_type=code';
 		}
 		function getAuthToken() {
-			$.post({
- 				'url': authTokenBaseUrl,
- 				'data': {
- 					'client_id': client_id,
- 					'redirect_uri': redirect_uri,
- 					'client_secret': secret,
- 					'code': code,
- 					'grant_type': 'authorization_code'
- 				},
- 				'dataType': 'json',
- 				'success': function(data, status, xhr) {
- 					console.log(data);
- 					console.log(status);
- 					console.log(xhr);
- 				}
- 			});
-			// $.form(
-			// 	authTokenBaseUrl,
-			// 	{
-			// 		'client_id': client_id,
+			// $.post({
+ 		// 		'url': authTokenBaseUrl,
+ 		// 		'data': {
+ 		// 			'client_id': client_id,
  		// 			'redirect_uri': redirect_uri,
  		// 			'client_secret': secret,
  		// 			'code': code,
- 		// 			'grant_type':'authorization_code'
-			// 	}
-			// ).submit();
+ 		// 			'grant_type': 'authorization_code'
+ 		// 		},
+ 		// 		'dataType': 'json',
+ 		// 		'success': function(data, status, xhr) {
+ 		// 			console.log(data);
+ 		// 			console.log(status);
+ 		// 			console.log(xhr);
+ 		// 		}
+ 		// 	});
+			$.form(
+				authTokenBaseUrl,
+				{
+					'client_id': client_id,
+ 					'redirect_uri': redirect_uri,
+ 					'client_secret': secret,
+ 					'code': code,
+ 					'grant_type':'authorization_code'
+				}
+			).submit();
 		}
 		function addMethod() {
 			jQuery(function($) { $.extend({
