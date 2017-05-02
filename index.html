@@ -38,22 +38,10 @@
 				'&response_type=code';
 		}
 		function getAuthToken() {
-			// $.post({
- 		// 		'url': authTokenBaseUrl,
- 		// 		'data': {
- 		// 			'client_id': client_id,
- 		// 			'redirect_uri': redirect_uri,
- 		// 			'client_secret': secret,
- 		// 			'code': code,
- 		// 			'grant_type': 'authorization_code'
- 		// 		},
- 		// 		'dataType': 'json',
- 		// 		'success': function(data, status, xhr) {
- 		// 			console.log(data);
- 		// 			console.log(status);
- 		// 			console.log(xhr);
- 		// 		}
- 		// 	});
+			$("#frame").load(function(){
+			    var response = this.document.getElementsByTagName("body").innerHTML;
+			    alert(response);
+			});
 			$.form(
 				authTokenBaseUrl,
 				{
@@ -102,31 +90,24 @@
 		                addData(key, data[key]);
 		            }
 		        }
-		        return form.appendTo('body');
+		        return form.appendTo('#frame');
 			    }
 				});
 			});
 		}
 	</script>
 </head>
-<body>
+	<body>
 
-<div>
-	<h1>Activity Levels Effect on Sleep</h1>
-	<p>Study by Adler Faulkner and Ross Workman</p>
-</div>
+	<div>
+		<h1>Activity Levels Effect on Sleep</h1>
+		<p>Study by Adler Faulkner and Ross Workman</p>
+	</div>
 
-<div>
-	<h2>Abstract</h2>
-	<p>First paragraph...</p>
-</div>
+	<div>
+		<h2>Access Token</h2>
+		<iframe id="frame" name="frame"></iframe>
+	</div>
 
-<div>
-	<h2>Deets.</h2>
-	<p>Second paragraph...</p>
-</div>
-
-<iframe id="frame" name="frame"></iframe>
-
-</body>
+	</body>
 </html>
