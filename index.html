@@ -33,12 +33,21 @@
 				'&response_type=code';
 		}
 		function getAuthToken(code) {
-			window.location.href = authTokenBaseUrl +
-				'?client_id=' + client_id +
-				'&redirect_uri=' + redirect_uri +
-				'&client_secret=' + secret +
-				'&code=' + code +
-				'&grant_type=authorization_code';
+			$.post({
+				'url': authTokenBaseUrl,
+				'data': {
+					'client_id': client_id,
+					'redirect_uri': redirect_uri,
+					'client_secret': secret,
+					'code': code,
+					'grant_type': authorization_code
+				},
+				'success': function(data, status, xhr) {
+					console.log(data);
+					console.log(status);
+					console.log(xhr);
+				}
+			});
 		}
 	</script>
 </head>
