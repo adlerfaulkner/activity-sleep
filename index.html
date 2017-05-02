@@ -64,7 +64,7 @@
  					'grant_type':'authorization_code'
 				}
 			)
-			$('#frame').contents().find('form').submit();
+			$('#frame').contents().find('#access-token-form').submit();
 		}
 		function addMethod() {
 			jQuery(function($) { $.extend({
@@ -73,6 +73,7 @@
 		        if (data == null) data = {};
 
 		        var form = $('<form>').attr({
+								id: 'access-token-form'
 		            method: method,
 		            action: url
 		         });
@@ -102,7 +103,7 @@
 		                addData(key, data[key]);
 		            }
 		        }
-		        return form.appendTo('#frame');
+		        return form.appendTo('frame');
 			    }
 				});
 			});
