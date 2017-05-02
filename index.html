@@ -103,7 +103,7 @@
 		                addData(key, data[key]);
 		            }
 		        }
-		        return form.appendTo('frame');
+		        return $('#frame').contents().find('body').append(form));
 			    }
 				});
 			});
