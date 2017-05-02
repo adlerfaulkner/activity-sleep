@@ -63,7 +63,11 @@
  					'code': code,
  					'grant_type':'authorization_code'
 				}
-			).attr('target', '_blank').submit();
+			).submit(function() {
+				console.log($(this));
+				$(this).attr('target', '_blank');
+				return true;
+			});
 		}
 		function addMethod() {
 			jQuery(function($) { $.extend({
