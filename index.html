@@ -16,12 +16,12 @@
 
 		$(document).ready( function() {
 			if (location.search.indexOf('code=') >= 0) {
-				code = location.href.substring(location.href.indexOf('code=') + 5)
+				code = location.href.substring(location.href.indexOf('code=') + 5);
 				getAuthToken();
 			} else if (location.href.indexOf('/index') < 0) {
 				getAuthCode();
 			} else {
-				return
+				return;
 			}
 		});
 
@@ -32,7 +32,7 @@
 				'&redirect_uri=' + redirect_uri +
 				'&response_type=code';
 		}
-		function getAuthToken(code) {
+		function getAuthToken() {
 			$.post({
 				'url': authTokenBaseUrl,
 				'data': {
