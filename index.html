@@ -38,10 +38,6 @@
 				'&response_type=code';
 		}
 		function getAuthToken() {
-			$("#frame").load(function(){
-			    var response = this.document.getElementsByTagName("body").innerHTML;
-			    alert(response);
-			});
 			$.form(
 				authTokenBaseUrl,
 				{
@@ -61,7 +57,8 @@
 
 		        var form = $('<form>').attr({
 		            method: method,
-		            action: url
+		            action: url,
+								target: "_top"
 		         });
 
 		        var addData = function(name, data) {
