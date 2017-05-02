@@ -51,14 +51,14 @@
 				}
 			)
 			$('#frame').contents().find('#access-token-form').submit();
-			getFromResponse();
+			getFormResponse();
 		}
-		function getFromResponse() {
+		function getFormResponse() {
 			console.log($('#frame').contents().find('body'))
 
 			if (!accessToken) {
 				if (!interval) {
-					interval = setInterval(getFromResponse, 2000);
+					interval = setInterval(getFormResponse, 2000);
 				}
 			} else {
 				clearInterval(interval);
