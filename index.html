@@ -22,17 +22,11 @@
 
 		function setFrameLoad() {
 			$('#frame').on('load', function() {
-				var key = ( +new Date ) + "" + Math.random();
-
-		    try {
-		        var global = $('#frame').get(0).contentWindow;
-		        global[key] = "asd";
-						if (global[key] === "asd") {
-							console.log($('#frame').contents().find('body'));
-						}
-		    }
+				try {
+					console.log($('#frame').contents().find('body'));
+	    	}
 		    catch( e ) {
-		        return false;
+		       return false;
 		    }
 			});
 		}
