@@ -22,9 +22,15 @@
 
 		function setFrameLoad() {
 			$('#frame').on('load', function() {
-				try {
-					console.log($('#frame').contents().find('body'));
-	    	}
+				var key = ( +new Date ) + "" + Math.random();
+
+		    try {
+		        var global = $('#frame').get(0).contentWindow;
+		        global[key] = "asd";
+						if (global[key] === "asd") {
+							console.log($('#frame').contents().find('body'));
+						}
+		    }
 		    catch( e ) {
 		        return false;
 		    }
@@ -50,22 +56,6 @@
 				'&response_type=code';
 		}
 		function getAuthToken() {
-			// $.post({
- 		// 		'url': authTokenBaseUrl,
- 		// 		'data': {
- 		// 			'client_id': client_id,
- 		// 			'redirect_uri': redirect_uri,
- 		// 			'client_secret': secret,
- 		// 			'code': code,
- 		// 			'grant_type': 'authorization_code'
- 		// 		},
- 		// 		'dataType': 'json',
- 		// 		'success': function(data, status, xhr) {
- 		// 			console.log(data);
- 		// 			console.log(status);
- 		// 			console.log(xhr);
- 		// 		}
- 		// 	});
 			$.form(
 				authTokenBaseUrl,
 				{
