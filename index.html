@@ -12,11 +12,11 @@
 		var secret = "Fa9cOdKgDtA8TavdB1OZ1AM";
 		var redirect_uri = "https://adlerfaulkner.github.io/activity-sleep/index";
 		var scope = "mshealth.ReadProfile";
-		var code = ""
+		var code = "";
 
 		$(document).ready( function() {
 			if (location.search.indexOf('code=') >= 0) {
-				code = location.href.substring(location.href.indexOf('code=') + 5);
+				code = location.href.substring(location.href.indexOf('code=') + 5)
 				getAuthToken();
 			} else if (location.href.indexOf('/index') < 0) {
 				getAuthCode();
@@ -32,23 +32,13 @@
 				'&redirect_uri=' + redirect_uri +
 				'&response_type=code';
 		}
-		function getAuthToken() {
-			$.post({
-				'url': authTokenBaseUrl,
-				'data': {
-					'client_id': client_id,
-					'redirect_uri': redirect_uri,
-					'client_secret': secret,
-					'code': code,
-					'grant_type': 'authorization_code'
-				},
-				'dataType': 'jsonp',
-				'success': function(data, status, xhr) {
-					console.log(data);
-					console.log(status);
-					console.log(xhr);
-				}
-			});
+		function getAuthToken(code) {
+			window.location.href = authTokenBaseUrl +
+				'?client_id=' + client_id +
+				'&redirect_uri=' + redirect_uri +
+				'&client_secret=' + secret +
+				'&code=' + code +
+				'&grant_type=authorization_code';
 		}
 	</script>
 </head>
