@@ -14,10 +14,15 @@
 		var scope = "mshealth.ReadProfile";
 		var code = "";
 
+
+		if (window.parent) document.addEventListener( 'load', function() {
+		    window.parent.postMessage( "child loaded", "/" );
+		}, false );
+
 		var iframe = document.getElementById('frame');
 		var origin = window.location.protocol + '://' + window.location.host;
 		if (window.location.port != 80) origin += ':' + window.location.port;
-		
+
 		window.addEventListener( 'message', function (event) {
 			if (event.source != iframe.contentWindow || event.origin != origin || event.data != "child loaded") return;
 			console.log($('#frame').contents().find('body'));
