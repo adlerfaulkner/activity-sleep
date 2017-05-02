@@ -100,7 +100,7 @@
 		$('.send-request-button').click( function() {
 			accessToken = $('#access-token').val()
 			if (!$.trim(accessToken)) {
-				alert('Please paste your access token!') and return;
+				alert('Please paste your access token!');
 			} else {
 				$.get({
 				  'url': baseAPIUrl + $(this).attr('data-path'),
