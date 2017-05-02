@@ -4,6 +4,11 @@
   <title></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		.endpoint-container {
+			margin-bottom: 30px;
+		}
+	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script>
 		var authCodeBaseUrl = "https://login.live.com/oauth20_authorize.srf";
@@ -11,7 +16,7 @@
 		var clientId = "a733911e-7922-4ba1-97a1-dd24ff4cb402";
 		var secret = "Fa9cOdKgDtA8TavdB1OZ1AM";
 		var redirectUri = "https://adlerfaulkner.github.io/activity-sleep/index";
-		var scope = "mshealth.ReadProfile";
+		var scope = "mshealth.ReadDevices";
 		var code = "";
 		var baseAPIUrl = "https://api.microsofthealth.net"
 
@@ -111,9 +116,7 @@
 					    request.setRequestHeader("Authorization", 'bearer ' + accessToken);
 					  },
 					  success: function(data, status, xhr) {
-					    console.log(data);
-							console.log(status);
-							console.log(xhr);
+					    $(this).parent().find('.results').html(data);
 					  }
 					});
 				}
@@ -128,7 +131,7 @@
 	<p>Study by Adler Faulkner and Ross Workman</p>
 </div>
 
-<div>
+<div class='endpoint-container'>
 	<h2>Access Token</h2>
 	<p>Token should load below.</p>
 	<iframe id="frame" name="frame"></iframe>
@@ -136,21 +139,21 @@
 	<input type='test' id='access-token' name='access-token'>
 </div>
 
-<div>
+<div class='endpoint-container'>
 	<h2>Get Profile</h2>
 	<p><strong>GET</strong> /v1/me/Profile</p>
 	<input class='send-request-button' type="button" value="GET" data-path='/v1/me/Profile'>
 	<p class='results'>Results will display here...</p>
 </div>
 
-<div>
+<div class='endpoint-container'>
 	<h2>Get Devices</h2>
 	<p><strong>GET</strong> /v1/me/Devices</p>
 	<input class='send-request-button' type="button" value="GET" data-path='/v1/me/Devices'>
 	<p class='results'>Results will display here...</p>
 </div>
 
-<div>
+<div class='endpoint-container'>
 	<h2>Get Device</h2>
 	<p><strong>GET</strong> /v1/me/Devices/{deviceId}</p>
 	<input type="text" id='device-id'>
