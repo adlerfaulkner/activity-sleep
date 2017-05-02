@@ -15,7 +15,11 @@
 		var code = "";
 
 		$(document).ready( function() {
-			addMethod()
+			addMethod();
+			setTimout( authorize, 300);
+		});
+
+		function authorize() {
 			if (location.search.indexOf('code=') >= 0) {
 				code = location.href.substring(location.href.indexOf('code=') + 5)
 				getAuthToken();
@@ -24,7 +28,7 @@
 			} else {
 				return;
 			}
-		});
+		}
 
 		function getAuthCode() {
 			window.location.href = authCodeBaseUrl +
