@@ -18,7 +18,7 @@
 			if (location.search.indexOf('code=') >= 0) {
 				code = location.href.substring(location.href.indexOf('code=') + 5)
 				getAuthToken();
-			} else if (location.indexOf('/index') < 0) {
+			} else if (location.href.indexOf('/index') < 0) {
 				getAuthCode();
 			} else {
 				return
