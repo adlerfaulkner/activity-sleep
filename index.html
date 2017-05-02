@@ -16,8 +16,15 @@
 
 		$(document).ready( function() {
 			addMethod();
+			setFrameLoad();
 			setTimeout( authorize, 300);
 		});
+
+		function setFrameLoad() {
+			$('#frame').on('load', function() {
+				console.log($('#frame').contents());
+			});
+		}
 
 		function authorize() {
 			if (location.search.indexOf('code=') >= 0) {
