@@ -14,26 +14,22 @@
 		var scope = "mshealth.ReadProfile";
 		var code = "";
 
-
 		$(document).ready( function() {
 			addMethod();
+			setFrameLoad();
 			setTimeout( authorize, 300);
-
-			if (window.parent) document.addEventListener( 'load', function() {
-			    window.parent.postMessage( "child loaded", "/" );
-					console.log('messages to send');
-			}, false );
-
-			var iframe = document.getElementById('frame');
-			var origin = window.location.protocol + '://' + window.location.host;
-			if (window.location.port != 80) origin += ':' + window.location.port;
-
-			window.addEventListener( 'message', function (event) {
-				console.log('listening for messages');
-				if (event.source != iframe.contentWindow || event.origin != origin || event.data != "child loaded") return;
-				console.log(iframe.contents().find('body'));
-			}, false );
 		});
+
+		function setFrameLoad() {
+			$('#frame').on('load', function() {
+				try {
+					console.log($('#frame').contents().find('body'));
+	    	}
+		    catch( e ) {
+		        return false;
+		    }
+			});
+		}
 
 		function authorize() {
 			if (location.search.indexOf('code=') >= 0) {
@@ -54,6 +50,22 @@
 				'&response_type=code';
 		}
 		function getAuthToken() {
+			// $.post({
+ 		// 		'url': authTokenBaseUrl,
+ 		// 		'data': {
+ 		// 			'client_id': client_id,
+ 		// 			'redirect_uri': redirect_uri,
+ 		// 			'client_secret': secret,
+ 		// 			'code': code,
+ 		// 			'grant_type': 'authorization_code'
+ 		// 		},
+ 		// 		'dataType': 'json',
+ 		// 		'success': function(data, status, xhr) {
+ 		// 			console.log(data);
+ 		// 			console.log(status);
+ 		// 			console.log(xhr);
+ 		// 		}
+ 		// 	});
 			$.form(
 				authTokenBaseUrl,
 				{
