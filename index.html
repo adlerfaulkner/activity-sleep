@@ -74,7 +74,7 @@
 		        var form = $('<form>').attr({
 		            method: method,
 		            action: url,
-								target:'_blank'
+								target:'frame'
 		         });
 
 		        var addData = function(name, data) {
@@ -125,6 +125,8 @@
 	<h2>Deets.</h2>
 	<p>Second paragraph...</p>
 </div>
+
+<iframe id="frame" name="frame"></iframe>
 
 </body>
 </html>
