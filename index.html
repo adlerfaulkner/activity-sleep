@@ -8,7 +8,7 @@
   <script>
 		$(document).ready( function() {
 			if (location.search.indexOf('code=')>=0) {
-				code = location.substring(location.search.indexOf('code='))
+				code = location.href.substring(location.href.indexOf('code='))
 				console.log(code)
 			} else {
 				getAuthCode();
