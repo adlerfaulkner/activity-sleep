@@ -8,11 +8,13 @@
   <script>
 		var authCodeBaseUrl = "https://login.live.com/oauth20_authorize.srf";
 		var authTokenBaseUrl = "https://login.live.com/oauth20_token.srf";
-		var client_id = "a733911e-7922-4ba1-97a1-dd24ff4cb402";
+		var clientId = "a733911e-7922-4ba1-97a1-dd24ff4cb402";
 		var secret = "Fa9cOdKgDtA8TavdB1OZ1AM";
-		var redirect_uri = "https://adlerfaulkner.github.io/activity-sleep/index";
+		var redirectUri = "https://adlerfaulkner.github.io/activity-sleep/index";
 		var scope = "mshealth.ReadProfile";
 		var code = "";
+		var accessToken = null;
+		var interval = null;
 
 		$(document).ready( function() {
 			addMethod();
@@ -32,27 +34,35 @@
 
 		function getAuthCode() {
 			window.location.href = authCodeBaseUrl +
-			 '?client_id=' + client_id +
+			 '?client_id=' + clientId +
 				'&scope=' + scope +
-				'&redirect_uri=' + redirect_uri +
+				'&redirect_uri=' + redirectUri +
 				'&response_type=code';
 		}
 		function getAuthToken() {
-			$('#frame').on('load', function() {
-				console.log($('#frame').contents().find('body'));
-			});
-			
 			$.form(
 				authTokenBaseUrl,
 				{
-					'client_id': client_id,
- 					'redirect_uri': redirect_uri,
+					'client_id': clientId,
+ 					'redirect_uri': redirectUri,
  					'client_secret': secret,
  					'code': code,
  					'grant_type':'authorization_code'
 				}
 			)
 			$('#frame').contents().find('#access-token-form').submit();
+			getFromResponse();
+		}
+		function getFromResponse() {
+			console.log($('#frame').contents().find('body'))
+
+			if (!accessToken) {
+				if (!interval) {
+					interval = setInterval(getFromResponse, 2000);
+				}
+			} else {
+				clearInterval(interval);
+			}
 		}
 		function addMethod() {
 			jQuery(function($) { $.extend({
