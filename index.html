@@ -6,30 +6,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script>
+		var authCodeBaseUrl = "https://login.live.com/oauth20_authorize.srf";
+		var authTokenBaseUrl = "https://login.live.com/oauth20_token.srf";
+		var client_id = "a733911e-7922-4ba1-97a1-dd24ff4cb402";
+		var secret = "Fa9cOdKgDtA8TavdB1OZ1AM";
+		var redirect_uri = "https://adlerfaulkner.github.io/activity-sleep/index";
+		var scope = "mshealth.ReadProfile";
+		var code = ""
+
 		$(document).ready( function() {
-			if (location.search.indexOf('code=')>=0) {
+			if (location.search.indexOf('code=') >= 0) {
 				code = location.href.substring(location.href.indexOf('code=') + 5)
-				console.log(code)
-			} else {
+				getAuthToken();
+			} else if (location.indexOf('/index') < 0) {
 				getAuthCode();
+			} else {
+				return
 			}
 		});
 
 		function getAuthCode() {
-			var base_url = "https://login.live.com/oauth20_authorize.srf";
-			var client_id = "a733911e-7922-4ba1-97a1-dd24ff4cb402";
-			var secret = "Fa9cOdKgDtA8TavdB1OZ1AM";
-			var redirect_uri = "https://adlerfaulkner.github.io/activity-sleep/index";
-			var scope = "mshealth.ReadProfile"
-			window.location.href = base_url + '?response_type=code&redirect_uri=' + redirect_uri + '&scope=' + scope + '&client_id=' + client_id;
+			window.location.href = authCodeBaseUrl +
+			 '?client_id=' + client_id +
+				'&scope=' + scope +
+				'&redirect_uri=' + redirect_uri +
+				'&response_type=code';
+		}
+		function getAuthToken(code) {
+			window.location.href = authTokenBaseUrl +
+				'?client_id=' + client_id +
+				'&redirect_uri=' + redirect_uri +
+				'&client_secret=' + secret +
+				'&code=' + code +
+				'&grant_type=authorization_code';
 		}
 	</script>
 </head>
 <body>
 
-<h1>My First Heading</h1>
+<div>
+	<h1>Activity Levels Effect on Sleep</h1>
+	<p>Study by Adler Faulkner and Ross Workman</p>
+</div>
 
-<p>My first paragraph.</p>
+<div>
+	<h2>Abstract</h2>
+	<p>First paragraph...</p>
+</div>
+
+<div>
+	<h2>Deets.</h2>
+	<p>Second paragraph...</p>
+</div>
 
 </body>
 </html>
