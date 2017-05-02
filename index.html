@@ -54,11 +54,14 @@
 			getFormResponse();
 		}
 		function getFormResponse() {
-			console.log($('#frame').contents().find('body'))
 
 			if (!accessToken) {
 				if (!interval) {
 					interval = setInterval(getFormResponse, 2000);
+				} else {
+					if ($('#frame').contents().find('body').length) {
+						console.log(JSON.parse($('#frame').contents().find('pre')));
+					}
 				}
 			} else {
 				clearInterval(interval);
