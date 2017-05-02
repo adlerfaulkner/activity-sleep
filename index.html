@@ -13,13 +13,14 @@
 		var redirectUri = "https://adlerfaulkner.github.io/activity-sleep/index";
 		var scope = "mshealth.ReadProfile";
 		var code = "";
-		var accessToken = null;
-		var interval = null;
+		var baseAPIUrl = "https://api.microsofthealth.net"
 
 		$(document).ready( function() {
 			addMethod();
 			setTimeout( authorize, 300);
 		});
+
+
 
 		function authorize() {
 			if (location.search.indexOf('code=') >= 0) {
@@ -39,7 +40,7 @@
 				'&redirect_uri=' + redirectUri +
 				'&response_type=code';
 		}
-		
+
 		function getAuthToken() {
 			$.form(
 				authTokenBaseUrl,
@@ -95,6 +96,26 @@
 				});
 			});
 		}
+
+		$('.send-request-button').click( function() {
+			accessToken = $('#access-token').val()
+			if (!$.trim(accessToken)) {
+				alert('Please paste your access token!') and return;
+			} else {
+				$.get({
+				  'url': baseAPIUrl + $(this).attr('data-path'),
+					'data': null,
+					'beforeSend': function(request) {
+				    request.setRequestHeader("Authorization", 'bearer ' + accessToken);
+				  },
+				  success: function(data, status, xhr) {
+				    console.log(data);
+						console.log(status);
+						console.log(xhr);
+				  }
+				});
+			}
+		});
 	</script>
 </head>
 <body>
@@ -110,6 +131,28 @@
 	<iframe id="frame" name="frame"></iframe>
 	<p>Paste token below.</p>
 	<input type='test' id='access-token' name='access-token'>
+</div>
+
+<div>
+	<h2>Get Profile</h2>
+	<p><strong>GET</strong> /v1/me/Profile</p>
+	<input class='send-request-button' type="button" value="GET" data-path='/v1/me/Profile'>
+	<p class='results'>Results will display here...</p>
+</div>
+
+<div>
+	<h2>Get Devices</h2>
+	<p><strong>GET</strong> /v1/me/Devices</p>
+	<input class='send-request-button' type="button" value="GET" data-path='/v1/me/Devices'>
+	<p class='results'>Results will display here...</p>
+</div>
+
+<div>
+	<h2>Get Device</h2>
+	<p><strong>GET</strong> /v1/me/Devices/{deviceId}</p>
+	<input type="text" id='device-id'>
+	<input class='send-request-button' type="button" value="GET">
+	<p class='results'>Results will display here...</p>
 </div>
 
 </body>
