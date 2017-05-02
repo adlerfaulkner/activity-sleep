@@ -14,13 +14,13 @@
 		var scope = "mshealth.ReadProfile";
 		var code = "";
 
+		$('#frame').on('load', function() {
+			console.log($('#frame').contents().find('body'));
+		});
+
 		$(document).ready( function() {
 			addMethod();
 			setTimeout( authorize, 300);
-
-			$('#frame').on('load', function() {
-				console.log($('#frame').contents().find('body'));
-			});
 		});
 
 		function authorize() {
